@@ -31,8 +31,7 @@ public class DVTWeatherApplication extends Application {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
-        Log.e("DVTWeather", "I am ere");
-        Call<WeatherResponse> response = getWeatherService().getWeatherForecast(-1.550300,36.938221,Constants.OPEN_WEATHER_MAP_API_KEY);
+        Call<WeatherResponse> response = getWeatherService().getWeatherForecast(-1.550300,36.938221,Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
         response.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
@@ -43,6 +42,21 @@ public class DVTWeatherApplication extends Application {
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
                 call.cancel();
                 Log.i("DVTweather", t.getMessage());
+
+            }
+        });
+
+        Call<WeatherResponse> currentWeather = getWeatherService().getCurrentWeather(-1.550300,36.938221,Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
+        currentWeather.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                Log.i("currentweather", "success");
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                call.cancel();
+                Log.i("currentweather", t.getMessage());
 
             }
         });
