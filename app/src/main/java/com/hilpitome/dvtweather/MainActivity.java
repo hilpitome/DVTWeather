@@ -13,15 +13,19 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.hilpitome.dvtweather.contract.WeatherContract;
+import com.hilpitome.dvtweather.data.WeatherResponse;
 import com.hilpitome.dvtweather.databinding.ActivityMainBinding;
+import com.hilpitome.dvtweather.presenter.WeatherPresenter;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements WeatherContract.View{
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
+    private WeatherContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        presenter = new WeatherPresenter(this);
     }
 
     @Override
@@ -79,6 +84,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy(){
         super.onDestroy();
+        presenter.cleanUp();
+    }
+
+    @Override
+    public void setCurrentWeather(WeatherResponse data) {
+
+    }
+
+    @Override
+    public void setWeatherForecast(WeatherResponse data) {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void removeProgres() {
 
     }
 }
