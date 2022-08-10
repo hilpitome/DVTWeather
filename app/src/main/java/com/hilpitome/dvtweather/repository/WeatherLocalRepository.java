@@ -1,17 +1,13 @@
 package com.hilpitome.dvtweather.repository;
 
-import androidx.lifecycle.LiveData;
+import com.hilpitome.dvtweather.contract.WeatherContract;
 
-import com.hilpitome.dvtweather.data.WeatherResponse;
-
-public class WeatherLocalRepository implements WeatherRepository{
+public class WeatherLocalRepository implements WeatherContract.WeatherModel {
     @Override
-    public LiveData<WeatherResponse> fetchCurrentWeather() {
-        return null;
+    public void fetchCurrentWeather() {
     }
 
     @Override
-    public LiveData<WeatherResponse> fetchForecastedWeather() {
-        return null;
+    public void fetchForecastedWeather() {
     }
 }
