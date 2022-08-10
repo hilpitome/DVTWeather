@@ -1,6 +1,8 @@
 package com.hilpitome.dvtweather;
 
 import android.app.Application;
+import android.content.Context;
+
 import timber.log.Timber;
 
 public class DVTWeatherApplication extends Application {
@@ -13,4 +15,5 @@ public class DVTWeatherApplication extends Application {
             Timber.plant(new Timber.DebugTree());
         }
     }
+
 }

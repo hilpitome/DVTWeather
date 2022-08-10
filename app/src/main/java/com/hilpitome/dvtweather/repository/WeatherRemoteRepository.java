@@ -40,7 +40,6 @@ public class WeatherRemoteRepository implements WeatherContract.WeatherModel {
     @Override
     public void fetchCurrentWeather() {
         Call<WeatherResponse> response = weatherService.getCurrentWeather(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
-        Timber.i("after calling fet current weather");
 
         response.enqueue(new Callback<WeatherResponse>() {
             @Override
