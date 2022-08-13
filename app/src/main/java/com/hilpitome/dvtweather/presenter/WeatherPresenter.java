@@ -1,7 +1,7 @@
 package com.hilpitome.dvtweather.presenter;
 
 import com.hilpitome.dvtweather.contract.WeatherContract;
-import com.hilpitome.dvtweather.data.WeatherResponse;
+import com.hilpitome.dvtweather.data.CurrentWeatherResponse;
 import com.hilpitome.dvtweather.repository.WeatherRemoteRepository;
 
 import java.lang.ref.WeakReference;
@@ -35,14 +35,14 @@ public class WeatherPresenter implements WeatherContract.Presenter {
     }
 
     @Override
-    public void setCurrentWeatherData(WeatherResponse data) {
+    public void setCurrentWeatherData(CurrentWeatherResponse data) {
         view.get().removeProgress();
         view.get().setCurrentWeather(data);
         Timber.d("current weather in presenter");
     }
 
     @Override
-    public void setWeatherForecast(WeatherResponse data) {
+    public void setWeatherForecast(CurrentWeatherResponse data) {
         view.get().removeProgress();
         view.get().setWeatherForecast(data);
         Timber.d("forecasted weather in presenter");

@@ -1,13 +1,11 @@
 package com.hilpitome.dvtweather.contract;
 
-import androidx.lifecycle.LiveData;
-
-import com.hilpitome.dvtweather.data.WeatherResponse;
+import com.hilpitome.dvtweather.data.CurrentWeatherResponse;
 
 public interface WeatherContract {
     interface View {
-        void setCurrentWeather(WeatherResponse data);
-        void setWeatherForecast(WeatherResponse data);
+        void setCurrentWeather(CurrentWeatherResponse data);
+        void setWeatherForecast(CurrentWeatherResponse data);
         void showProgress();
         void removeProgress();
     }
@@ -15,8 +13,8 @@ public interface WeatherContract {
         void getCurrentWeather();
         void getForecastedWeather();
         void cleanUp();
-        void setCurrentWeatherData(WeatherResponse data);
-        void setWeatherForecast(WeatherResponse data);
+        void setCurrentWeatherData(CurrentWeatherResponse data);
+        void setWeatherForecast(CurrentWeatherResponse data);
     }
     interface WeatherModel {
         void fetchCurrentWeather();

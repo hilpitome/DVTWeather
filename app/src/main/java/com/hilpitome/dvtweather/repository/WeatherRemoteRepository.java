@@ -1,11 +1,9 @@
 package com.hilpitome.dvtweather.repository;
 
 
-import android.util.Log;
-
 import com.hilpitome.dvtweather.api.WeatherService;
 import com.hilpitome.dvtweather.contract.WeatherContract;
-import com.hilpitome.dvtweather.data.WeatherResponse;
+import com.hilpitome.dvtweather.data.CurrentWeatherResponse;
 import com.hilpitome.dvtweather.utils.Constants;
 
 import okhttp3.OkHttpClient;
@@ -39,18 +37,18 @@ public class WeatherRemoteRepository implements WeatherContract.WeatherModel {
 
     @Override
     public void fetchCurrentWeather() {
-        Call<WeatherResponse> response = weatherService.getCurrentWeather(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
+        Call<CurrentWeatherResponse> response = weatherService.getCurrentWeather(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
 
-        response.enqueue(new Callback<WeatherResponse>() {
+        response.enqueue(new Callback<CurrentWeatherResponse>() {
             @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+            public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
                 presenter.setCurrentWeatherData(response.body());
                 Timber.i("fetch weather in repository");
 
             }
 
             @Override
-            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+            public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
                 call.cancel();
                 presenter.setCurrentWeatherData(null);
 
@@ -60,15 +58,15 @@ public class WeatherRemoteRepository implements WeatherContract.WeatherModel {
 
     @Override
     public void fetchForecastedWeather()  {
-        Call<WeatherResponse> response = weatherService.getWeatherForecast(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
-        response.enqueue(new Callback<WeatherResponse>() {
+        Call<CurrentWeatherResponse> response = weatherService.getWeatherForecast(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
+        response.enqueue(new Callback<CurrentWeatherResponse>() {
             @Override
-            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+            public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
                 presenter.setWeatherForecast(response.body());
             }
 
             @Override
-            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+            public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
                 call.cancel();
                 presenter.setWeatherForecast(null);
             }

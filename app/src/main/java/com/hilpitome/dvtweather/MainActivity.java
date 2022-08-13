@@ -2,11 +2,7 @@ package com.hilpitome.dvtweather;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -15,7 +11,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.gson.Gson;
 import com.hilpitome.dvtweather.contract.WeatherContract;
-import com.hilpitome.dvtweather.data.WeatherResponse;
+import com.hilpitome.dvtweather.data.CurrentWeatherResponse;
 import com.hilpitome.dvtweather.databinding.ActivityMainBinding;
 import com.hilpitome.dvtweather.presenter.WeatherPresenter;
 
@@ -33,7 +29,6 @@ public class MainActivity extends AppCompatActivity implements WeatherContract.V
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Timber.i("logging inside oncreate");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -86,13 +81,13 @@ public class MainActivity extends AppCompatActivity implements WeatherContract.V
     }
 
     @Override
-    public void setCurrentWeather(WeatherResponse data) {
+    public void setCurrentWeather(CurrentWeatherResponse data) {
         Timber.i("setting current weather");
         Timber.i(new Gson().toJson(data));
     }
 
     @Override
-    public void setWeatherForecast(WeatherResponse data) {
+    public void setWeatherForecast(CurrentWeatherResponse data) {
         Timber.i("setting forecasted weather");
         Timber.i(new Gson().toJson(data));
     }
