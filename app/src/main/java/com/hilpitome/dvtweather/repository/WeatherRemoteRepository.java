@@ -4,6 +4,7 @@ package com.hilpitome.dvtweather.repository;
 import com.hilpitome.dvtweather.api.WeatherService;
 import com.hilpitome.dvtweather.contract.WeatherContract;
 import com.hilpitome.dvtweather.data.CurrentWeatherResponse;
+import com.hilpitome.dvtweather.data.ForecastWeatherResponse;
 import com.hilpitome.dvtweather.utils.Constants;
 
 import okhttp3.OkHttpClient;
@@ -37,7 +38,7 @@ public class WeatherRemoteRepository implements WeatherContract.WeatherModel {
 
     @Override
     public void fetchCurrentWeather() {
-        Call<CurrentWeatherResponse> response = weatherService.getCurrentWeather(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
+        Call<CurrentWeatherResponse> response = weatherService.getCurrentWeather(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY,  "metric");
 
         response.enqueue(new Callback<CurrentWeatherResponse>() {
             @Override
@@ -58,15 +59,15 @@ public class WeatherRemoteRepository implements WeatherContract.WeatherModel {
 
     @Override
     public void fetchForecastedWeather()  {
-        Call<CurrentWeatherResponse> response = weatherService.getWeatherForecast(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 2, "metric");
-        response.enqueue(new Callback<CurrentWeatherResponse>() {
+        Call<ForecastWeatherResponse> response = weatherService.getWeatherForecast(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 5, "metric");
+        response.enqueue(new Callback<ForecastWeatherResponse>() {
             @Override
-            public void onResponse(Call<CurrentWeatherResponse> call, Response<CurrentWeatherResponse> response) {
+            public void onResponse(Call<ForecastWeatherResponse> call, Response<ForecastWeatherResponse> response) {
                 presenter.setWeatherForecast(response.body());
             }
 
             @Override
-            public void onFailure(Call<CurrentWeatherResponse> call, Throwable t) {
+            public void onFailure(Call<ForecastWeatherResponse> call, Throwable t) {
                 call.cancel();
                 presenter.setWeatherForecast(null);
             }
