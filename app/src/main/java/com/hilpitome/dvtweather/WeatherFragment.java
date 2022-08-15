@@ -45,7 +45,7 @@ public class WeatherFragment extends Fragment implements WeatherContract.View {
 
     private void populateViews() {
         adapter = new WeatherReportAdapter(new ArrayList<CustomList>());
-        recyclerview = binding.foreastRv;
+        recyclerview = binding.forecastTv;
         recyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerview.setAdapter(adapter);
 
