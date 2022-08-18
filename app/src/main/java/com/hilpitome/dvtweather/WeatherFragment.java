@@ -1,6 +1,7 @@
 package com.hilpitome.dvtweather;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.hilpitome.dvtweather.databinding.WeatherFragmentBinding;
 import com.hilpitome.dvtweather.presenter.WeatherPresenter;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class WeatherFragment extends Fragment implements WeatherContract.View {
@@ -71,6 +73,9 @@ public class WeatherFragment extends Fragment implements WeatherContract.View {
             binding.currentTemperature.setText(String.format(requireActivity().getResources().getString(R.string.current_temp)
             , data.getMain().getTemp()));
             binding.weatherDescription.setText(data.getWeather().get(0).getDescription());
+            final int sdk = android.os.Build.VERSION.SDK_INT;
+            changeBackgroundColor(data.getWeather().get(0).getMain());
+
         }
     }
 
@@ -89,5 +94,34 @@ public class WeatherFragment extends Fragment implements WeatherContract.View {
     @Override
     public void removeProgress() {
 
+    }
+
+    private void changeBackgroundColor(String description){
+        switch (description.toLowerCase()){
+            case "sunny":
+                binding.getRoot().setBackgroundColor(R.color.sunny);
+                changeBackgroundDrawable(R.drawable.forest_sunny);
+                break;
+            case "rainy":
+                binding.getRoot().setBackgroundColor(R.color.rainy);
+                changeBackgroundDrawable(R.drawable.forest_rainy);
+                break;
+            case "clouds":
+                binding.getRoot().setBackgroundColor(R.color.cloudy);
+                changeBackgroundDrawable(R.drawable.forest_cloudy);
+
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void changeBackgroundDrawable(int id){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            binding.getRoot().setBackground(getResources().getDrawable(id, getActivity().getTheme()));
+        } else {
+            binding.getRoot().setBackground(getResources().getDrawable(id));
+        }
     }
 }

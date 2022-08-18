@@ -22,4 +22,9 @@
     <style name="Theme.DVTWeather.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.DVTWeather.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name = "NoActionBar" parent = "@android:style/Theme.Holo.Light">
+        <item name = "android:windowActionBar">false</item>
+        <item name = "android:windowNoTitle">true</item>
+    </style>
 </resources>

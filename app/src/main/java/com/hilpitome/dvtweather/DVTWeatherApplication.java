@@ -1,7 +1,15 @@
 package com.hilpitome.dvtweather;
 
 import android.app.Application;
+import android.bluetooth.le.PeriodicAdvertisingParameters;
 import android.content.Context;
+
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
+
+import java.util.concurrent.TimeUnit;
 
 import timber.log.Timber;
 

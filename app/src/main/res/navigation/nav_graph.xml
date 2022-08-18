@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/WeatherFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/WeatherFragment"
         android:name="com.hilpitome.dvtweather.WeatherFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/weather_fragment">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/WeatherFavourites" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/WeatherFavourites"
         android:name="com.hilpitome.dvtweather.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/WeatherFragment" />
     </fragment>
 </navigation>
