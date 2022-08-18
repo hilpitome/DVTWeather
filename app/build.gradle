@@ -1,6 +1,19 @@
 plugins {
     id 'com.android.application'
 }
+Properties properties = new Properties()
+if (project.rootProject.file("local.properties").exists()) {
+    properties.load(project.rootProject.file("local.properties").newDataInputStream())
+}
+
+ext.getLocalProperty = { key ->
+    if (properties != null && properties.containsKey(key)) {
+        println(key + ": " + properties[key])
+        return properties[key]
+    } else {
+        return "\"sample_property_value\""
+    }
+}
 
 android {
     compileSdk 32
@@ -16,8 +29,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            versionNameSuffix "-debug"
+            buildConfigField "String", "OPEN_WEATHER_API", getLocalProperty("openweather.api.key")
+        }
         release {
             minifyEnabled false
+            buildConfigField "String", "OPEN_WEATHER_API", getLocalProperty("openweather.api.key")
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

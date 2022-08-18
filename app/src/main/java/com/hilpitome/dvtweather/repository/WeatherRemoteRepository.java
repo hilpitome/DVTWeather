@@ -1,6 +1,7 @@
 package com.hilpitome.dvtweather.repository;
 
 
+import com.hilpitome.dvtweather.BuildConfig;
 import com.hilpitome.dvtweather.api.WeatherService;
 import com.hilpitome.dvtweather.contract.WeatherContract;
 import com.hilpitome.dvtweather.data.CurrentWeatherResponse;
@@ -38,7 +39,7 @@ public class WeatherRemoteRepository implements WeatherContract.WeatherModel {
 
     @Override
     public void fetchCurrentWeather() {
-        Call<CurrentWeatherResponse> response = weatherService.getCurrentWeather(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY,  "metric");
+        Call<CurrentWeatherResponse> response = weatherService.getCurrentWeather(-1.550300, 36.938221, BuildConfig.OPEN_WEATHER_API,  "metric");
 
         response.enqueue(new Callback<CurrentWeatherResponse>() {
             @Override
@@ -59,7 +60,7 @@ public class WeatherRemoteRepository implements WeatherContract.WeatherModel {
 
     @Override
     public void fetchForecastedWeather()  {
-        Call<ForecastWeatherResponse> response = weatherService.getWeatherForecast(-1.550300, 36.938221, Constants.OPEN_WEATHER_MAP_API_KEY, 5, "metric");
+        Call<ForecastWeatherResponse> response = weatherService.getWeatherForecast(-1.550300, 36.938221, BuildConfig.OPEN_WEATHER_API, 5, "metric");
         response.enqueue(new Callback<ForecastWeatherResponse>() {
             @Override
             public void onResponse(Call<ForecastWeatherResponse> call, Response<ForecastWeatherResponse> response) {
